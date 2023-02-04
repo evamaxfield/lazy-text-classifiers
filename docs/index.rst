@@ -1,5 +1,5 @@
 Welcome to lazy-text-classifiers's documentation!
-======================================
+=================================================
 
 .. toctree::
    :hidden:
