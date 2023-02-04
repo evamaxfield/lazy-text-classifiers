@@ -1,0 +1,10 @@
+default_context:
+    author_name: "Eva Maxfield Brown"
+    author_email: "evamaxfieldbrown@gmail.com"
+    hosting_github_username_or_org: "evamaxfield"
+    project_name: "Lazy Text Classifiers"
+    project_slug: "lazy-text-classifiers"
+    python_slug: "lazy_text_classifiers"
+    project_short_description: "Build a test a variety of text classification models."
+    hosting_pypi_username: "evamaxfield"
+    license: "MIT License"
