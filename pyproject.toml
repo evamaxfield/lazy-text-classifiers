@@ -26,7 +26,13 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
 ]
 dynamic = ["version"]
-dependencies = []
+dependencies = [
+  "embetter~=0.3",
+  "pandas~=1.0",
+  "scikit-learn~=1.2",
+  "setfit~=0.5",
+  "transformers~=4.0",
+]
 
 [project.urls]
 Homepage = "https://github.com/evamaxfield/lazy-text-classifiers"
@@ -67,8 +73,7 @@ dev = [
 
 # entry points
 # https://peps.python.org/pep-0621/#entry-points
-[project.entry-points."console_scripts"]
-calc-string-length = "lazy_text_classifiers.bin.str_len:main"
+# [project.entry-points."console_scripts"]
 
 # build settings
 # https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html
