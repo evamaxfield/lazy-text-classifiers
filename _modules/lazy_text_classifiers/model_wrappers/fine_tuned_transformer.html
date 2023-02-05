@@ -5,7 +5,7 @@
     <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" />
 
     <!-- Generated with Sphinx 6.1.3 and Furo 2022.12.07 -->
-        <title>lazy_text_classifiers.model_wrappers.fine_tuned_transformer - lazy-text-classifiers 0.1.dev1+g2bb10ee documentation</title>
+        <title>lazy_text_classifiers.model_wrappers.fine_tuned_transformer - lazy-text-classifiers 0.1.dev1+g1535319 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../../../_static/styles/furo.css?digest=91d0f0d1c444bdcb17a68e833c7a53903343c195" />
     <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css" />
@@ -123,7 +123,7 @@
       </label>
     </div>
     <div class="header-center">
-      <a href="../../../index.html"><div class="brand">lazy-text-classifiers 0.1.dev1+g2bb10ee documentation</div></a>
+      <a href="../../../index.html"><div class="brand">lazy-text-classifiers 0.1.dev1+g1535319 documentation</div></a>
     </div>
     <div class="header-right">
       <div class="theme-toggle-container theme-toggle-header">
@@ -146,7 +146,7 @@
       <div class="sidebar-sticky"><a class="sidebar-brand" href="../../../index.html">
   
   
-  <span class="sidebar-brand-text">lazy-text-classifiers 0.1.dev1+g2bb10ee documentation</span>
+  <span class="sidebar-brand-text">lazy-text-classifiers 0.1.dev1+g1535319 documentation</span>
   
 </a><form class="sidebar-search-container" method="get" action="../../../search.html" role="search">
   <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
@@ -205,7 +205,7 @@
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
 
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Iterable</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Collection</span>
 
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -253,7 +253,7 @@
         <span class="k">if</span> <span class="n">output_dir</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">output_dir</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;lazy-text-fine-tuned-transformer/&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model_dir</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;fine-tuned-</span><span class="si">{</span><span class="n">base_model</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span>
 
         <span class="c1"># Handle training arguments</span>
         <span class="k">if</span> <span class="n">training_args</span><span class="p">:</span>
@@ -280,17 +280,17 @@
 
 <div class="viewcode-block" id="TransformerEstimator.fit"><a class="viewcode-back" href="../../../lazy_text_classifiers.model_wrappers.html#lazy_text_classifiers.model_wrappers.fine_tuned_transformer.TransformerEstimator.fit">[docs]</a>    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">:</span> <span class="s2">&quot;TransformerEstimator&quot;</span><span class="p">,</span>
-        <span class="n">x</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
-        <span class="n">y</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">x</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">y</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;TransformerEstimator&quot;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Fit the estimator.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        x: Iterable[str]</span>
+<span class="sd">        x: Collection[str]</span>
 <span class="sd">            The training data.</span>
-<span class="sd">        y: Iterable[str]</span>
+<span class="sd">        y: Collection[str]</span>
 <span class="sd">            The testing data.</span>
 
 <span class="sd">        Returns</span>
@@ -387,19 +387,19 @@
 
 <div class="viewcode-block" id="TransformerEstimator.predict"><a class="viewcode-back" href="../../../lazy_text_classifiers.model_wrappers.html#lazy_text_classifiers.model_wrappers.fine_tuned_transformer.TransformerEstimator.predict">[docs]</a>    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">:</span> <span class="s2">&quot;TransformerEstimator&quot;</span><span class="p">,</span>
-        <span class="n">x</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="n">x</span><span class="p">:</span> <span class="n">Collection</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Collection</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Predict the values using the fitted estimator.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
-<span class="sd">        x: Iterable[str]</span>
+<span class="sd">        x: Collection[str]</span>
 <span class="sd">            The data to predict.</span>
 
 <span class="sd">        Returns</span>
 <span class="sd">        -------</span>
-<span class="sd">        Iterable[str]</span>
+<span class="sd">        Collection[str]</span>
 <span class="sd">            The predictions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">pipe</span> <span class="o">=</span> <span class="n">pipeline</span><span class="p">(</span>
