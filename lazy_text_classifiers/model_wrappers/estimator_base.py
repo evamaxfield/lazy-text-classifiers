@@ -53,3 +53,5 @@ class EstimatorBase(ABC):
             The predictions.
         """
         pass
+
+    # TODO: save function
