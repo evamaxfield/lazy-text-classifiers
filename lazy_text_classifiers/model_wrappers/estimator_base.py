@@ -5,19 +5,18 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Iterable
 
-from typing_extensions import Self
-
 ###############################################################################
+
 
 class EstimatorBase(ABC):
     """Base class for estimators."""
 
     @abstractmethod
     def fit(
-        self: Self,
+        self: "EstimatorBase",
         x: Iterable[str],
         y: Iterable[str],
-    ) -> Self:
+    ) -> "EstimatorBase":
         """
         Fit the estimator.
 
@@ -30,14 +29,14 @@ class EstimatorBase(ABC):
 
         Returns
         -------
-        Any
+        "EstimatorBase"
             The estimator.
         """
         pass
 
     @abstractmethod
     def predict(
-        self: Self,
+        self: "EstimatorBase",
         x: Iterable[str],
     ) -> Iterable[str]:
         """

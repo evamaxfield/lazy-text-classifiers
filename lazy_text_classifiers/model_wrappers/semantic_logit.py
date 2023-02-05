@@ -24,7 +24,7 @@ def _make_pipeline(
         )
     else:
         enc = SentenceEncoder()
-    
+
     if logit_regression_cv_kwargs:
         logit = LogisticRegressionCV(
             **logit_regression_cv_kwargs,

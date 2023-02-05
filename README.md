@@ -45,6 +45,14 @@ results = ltc.fit(x_train, x_test, y_train, y_test)
 # | semantic-logit         |    0.73    |            0.725162 |    0.734887 |  0.73    | 0.728247 |  13.742 |
 # | tfidf-logit            |    0.70625 |            0.700126 |    0.709781 |  0.70625 | 0.702073 | 187.217 |
 # | fine-tuned-transformer |    0.11125 |            0.1118   |    0.10998  |  0.11125 | 0.109288 | 220.105 |
+
+# Get a specific model
+semantic_logit = ltc.fit_models["semantic-logit"]
+# either an scikit-learn Pipeline or a custom Transformer wrapper class
+
+# All models have a `save` function which will store into the normal format
+# * pickle for scikit-learn pipelines
+# * torch model directory for Transformers
 ```
 
 ## Documentation

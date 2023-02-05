@@ -14,7 +14,6 @@ from sklearn.metrics import (
     balanced_accuracy_score,
     precision_recall_fscore_support,
 )
-from typing_extensions import Self
 
 from .constants import MODEL_NAME_WRAPPER_LUT
 
@@ -31,11 +30,11 @@ class LazyTextClassifiers:
     # TODO: optuna??
 
     def __init__(
-        self: Self,
+        self: "LazyTextClassifiers",
         verbose: int = 0,
         ignore_warnings: bool = True,
         random_state: int | None = None,
-    ) -> Self:
+    ) -> None:
         """
         Class for managing fitting all classifiers.
 
@@ -55,6 +54,7 @@ class LazyTextClassifiers:
         # Set up warnings
         if ignore_warnings:
             import warnings
+
             warnings.filterwarnings("ignore")
 
         # Handle seed
@@ -62,9 +62,9 @@ class LazyTextClassifiers:
             torch.manual_seed(random_state)
             random.seed(random_state)
             np.random.seed(random_state)
-    
+
     def fit(
-        self: Self,
+        self: "LazyTextClassifiers",
         x_train: Iterable[str],
         x_test: Iterable[str],
         y_train: Iterable[str],
@@ -84,7 +84,7 @@ class LazyTextClassifiers:
             The training labels, an iterable object where each item is a class.
         y_test: Iterable[str]
             The testing labels, an iterable object where each item is a class.
-        
+
         model_kwargs: dict[str, Any] | None
             Any specific model kwargs to pass through.
             Default None (use default parameters and settings for all models)
@@ -138,19 +138,25 @@ class LazyTextClassifiers:
                 preds,
                 average="weighted",
             )
-            results_rows.append({
-                "model": model_name,
-                "accuracy": acc,
-                "balanced_accuracy": bal_acc,
-                "precision": pre,
-                "recall": rec,
-                "f1": f1,
-                "time": duration,
-            })
-        
+            results_rows.append(
+                {
+                    "model": model_name,
+                    "accuracy": acc,
+                    "balanced_accuracy": bal_acc,
+                    "precision": pre,
+                    "recall": rec,
+                    "f1": f1,
+                    "time": duration,
+                }
+            )
+
         # Create dataframe of results
-        self.results_df = pd.DataFrame(
-            results_rows,
-        ).sort_values(by="f1", ascending=False).reset_index(drop=True)
+        self.results_df = (
+            pd.DataFrame(
+                results_rows,
+            )
+            .sort_values(by="f1", ascending=False)
+            .reset_index(drop=True)
+        )
 
         return self.results_df

@@ -18,7 +18,6 @@ from transformers import (
     TrainingArguments,
     pipeline,
 )
-from typing_extensions import Self
 
 from .estimator_base import EstimatorBase
 
@@ -35,13 +34,13 @@ class TransformerEstimator(EstimatorBase):
     trainer: Trainer | None = None
 
     def __init__(
-        self: Self,
+        self: "TransformerEstimator",
         base_model: str = "distilbert-base-uncased",
         training_args: TrainingArguments | None = None,
         eval_size: float = 0.2,
         output_dir: Path | str | None = None,
         **kwargs: dict[str, Any],
-    ) -> Self:
+    ) -> None:
         self.base_model = base_model
         self.eval_size = eval_size
 
@@ -50,7 +49,7 @@ class TransformerEstimator(EstimatorBase):
             self.model_dir = Path(output_dir).resolve()
         else:
             self.model_dir = Path("lazy-text-fine-tuned-transformer/").resolve()
-        
+
         # Handle training arguments
         if training_args:
             self.training_args = training_args
@@ -69,17 +68,33 @@ class TransformerEstimator(EstimatorBase):
                 weight_decay=0.01,
             )
 
-
     def fit(
-        self: Self,
+        self: "TransformerEstimator",
         x: Iterable[str],
         y: Iterable[str],
-    ) -> Self:
+    ) -> "TransformerEstimator":
+        """
+        Fit the estimator.
+
+        Parameters
+        ----------
+        x: Iterable[str]
+            The training data.
+        y: Iterable[str]
+            The testing data.
+
+        Returns
+        -------
+        "TransformerEstimator"
+            The estimator.
+        """
         # Create dataframes and split to eval
-        df_all = pd.DataFrame({
-            "text": x,
-            "label": y,
-        })
+        df_all = pd.DataFrame(
+            {
+                "text": x,
+                "label": y,
+            }
+        )
         train_df, eval_df = train_test_split(
             df_all,
             test_size=self.eval_size,
@@ -92,7 +107,7 @@ class TransformerEstimator(EstimatorBase):
         for i, label in enumerate(label_names):
             label2id[label] = str(i)
             id2label[str(i)] = label
-        
+
         # Make the model
         model = AutoModelForSequenceClassification.from_pretrained(
             pretrained_model_name_or_path=self.base_model,
@@ -106,7 +121,7 @@ class TransformerEstimator(EstimatorBase):
         train_dataset = Dataset.from_pandas(train_df)
         eval_dataset = Dataset.from_pandas(eval_df)
         train_dataset = train_dataset.class_encode_column("label")
-        eval_dataset = eval_dataset.class_encode_column("label")        
+        eval_dataset = eval_dataset.class_encode_column("label")
 
         # Create tokenizer
         tokenizer = AutoTokenizer.from_pretrained(self.base_model)
@@ -120,6 +135,7 @@ class TransformerEstimator(EstimatorBase):
 
         # Load metrics and create metric compute func
         f1_metric = load_metric("f1")
+
         def compute_metrics(eval_pred: EvalPrediction) -> dict | None:
             predictions = np.argmax(eval_pred.predictions, axis=-1)
             f1_score = f1_metric.compute(
@@ -149,19 +165,29 @@ class TransformerEstimator(EstimatorBase):
 
         return self
 
-
     def predict(
-        self: Self,
+        self: "TransformerEstimator",
         x: Iterable[str],
     ) -> Iterable[str]:
+        """
+        Predict the values using the fitted estimator.
+
+        Parameters
+        ----------
+        x: Iterable[str]
+            The data to predict.
+
+        Returns
+        -------
+        Iterable[str]
+            The predictions.
+        """
         pipe = pipeline(
             "text-classification",
             model=str(self.model_dir),
             tokenizer=str(self.model_dir),
         )
-        return [
-            pred[0]["label"] for pred in pipe(x, truncation=True, top_k=1)
-        ]
+        return [pred[0]["label"] for pred in pipe(x, truncation=True, top_k=1)]
 
 
 def _make_pipeline(

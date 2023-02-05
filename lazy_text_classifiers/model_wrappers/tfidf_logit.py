@@ -28,7 +28,7 @@ def _make_pipeline(
             lowercase=True,
             stop_words="english",
         )
-    
+
     if logit_regression_cv_kwargs:
         logit = LogisticRegressionCV(
             **logit_regression_cv_kwargs,
