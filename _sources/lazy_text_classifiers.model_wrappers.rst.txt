@@ -1,0 +1,53 @@
+lazy\_text\_classifiers.model\_wrappers package
+===============================================
+
+Submodules
+----------
+
+lazy\_text\_classifiers.model\_wrappers.estimator\_base module
+--------------------------------------------------------------
+
+.. automodule:: lazy_text_classifiers.model_wrappers.estimator_base
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+lazy\_text\_classifiers.model\_wrappers.fine\_tuned\_transformer module
+-----------------------------------------------------------------------
+
+.. automodule:: lazy_text_classifiers.model_wrappers.fine_tuned_transformer
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+lazy\_text\_classifiers.model\_wrappers.semantic\_logit module
+--------------------------------------------------------------
+
+.. automodule:: lazy_text_classifiers.model_wrappers.semantic_logit
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+lazy\_text\_classifiers.model\_wrappers.setfit\_transformer module
+------------------------------------------------------------------
+
+.. automodule:: lazy_text_classifiers.model_wrappers.setfit_transformer
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+lazy\_text\_classifiers.model\_wrappers.tfidf\_logit module
+-----------------------------------------------------------
+
+.. automodule:: lazy_text_classifiers.model_wrappers.tfidf_logit
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: lazy_text_classifiers.model_wrappers
+   :members:
+   :undoc-members:
+   :show-inheritance:

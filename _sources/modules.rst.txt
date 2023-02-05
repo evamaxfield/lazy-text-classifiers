@@ -1,0 +1,7 @@
+lazy_text_classifiers
+=====================
+
+.. toctree::
+   :maxdepth: 4
+
+   lazy_text_classifiers

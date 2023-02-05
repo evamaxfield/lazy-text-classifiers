@@ -1,0 +1,45 @@
+lazy\_text\_classifiers package
+===============================
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   lazy_text_classifiers.model_wrappers
+
+Submodules
+----------
+
+lazy\_text\_classifiers.constants module
+----------------------------------------
+
+.. automodule:: lazy_text_classifiers.constants
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+lazy\_text\_classifiers.logging\_utils module
+---------------------------------------------
+
+.. automodule:: lazy_text_classifiers.logging_utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+lazy\_text\_classifiers.model\_selection module
+-----------------------------------------------
+
+.. automodule:: lazy_text_classifiers.model_selection
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: lazy_text_classifiers
+   :members:
+   :undoc-members:
+   :show-inheritance:
