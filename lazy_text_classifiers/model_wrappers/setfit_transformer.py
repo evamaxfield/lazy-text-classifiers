@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any, Iterable
+from typing import Any, Collection
 
 import pandas as pd
 from datasets import Dataset, load_metric
@@ -50,17 +50,17 @@ class TransformerEstimator(EstimatorBase):
 
     def fit(
         self: "TransformerEstimator",
-        x: Iterable[str],
-        y: Iterable[str],
+        x: Collection[str],
+        y: Collection[str],
     ) -> "TransformerEstimator":
         """
         Fit the estimator.
 
         Parameters
         ----------
-        x: Iterable[str]
+        x: Collection[str]
             The training data.
-        y: Iterable[str]
+        y: Collection[str]
             The testing data.
 
         Returns
@@ -103,7 +103,7 @@ class TransformerEstimator(EstimatorBase):
         f1_metric = load_metric("f1")
 
         def compute_metrics(
-            y_pred: Iterable[str], y_test: Iterable[str]
+            y_pred: Collection[str], y_test: Collection[str]
         ) -> dict | None:
             f1_score = f1_metric.compute(
                 predictions=y_pred,
@@ -136,19 +136,19 @@ class TransformerEstimator(EstimatorBase):
 
     def predict(
         self: "TransformerEstimator",
-        x: Iterable[str],
-    ) -> Iterable[str]:
+        x: Collection[str],
+    ) -> Collection[str]:
         """
         Predict the values using the fitted estimator.
 
         Parameters
         ----------
-        x: Iterable[str]
+        x: Collection[str]
             The data to predict.
 
         Returns
         -------
-        Iterable[str]
+        Collection[str]
             The predictions.
         """
         if self.trainer is not None:

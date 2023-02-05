@@ -34,19 +34,15 @@ SEMANTIC_BASE_MODELS = {
 
 SEMANTIC_MODEL_VARIANTS = {}
 for short_base_model_name, full_base_model_name in SEMANTIC_BASE_MODELS.items():
-    SEMANTIC_MODEL_VARIANTS[f"semantic-logit-{short_base_model_name}"] = (
-        partial(
-            semantic_logit._make_pipeline,
-            sentence_encoder_kwargs={
-                "name": full_base_model_name,
-            }
-        )
+    SEMANTIC_MODEL_VARIANTS[f"semantic-logit-{short_base_model_name}"] = partial(
+        semantic_logit._make_pipeline,
+        sentence_encoder_kwargs={
+            "name": full_base_model_name,
+        },
     )
-    SEMANTIC_MODEL_VARIANTS[f"fine-tuned-{short_base_model_name}"] = (
-        partial(
-            fine_tuned_transformer._make_pipeline,
-            base_model=full_base_model_name,
-        )
+    SEMANTIC_MODEL_VARIANTS[f"fine-tuned-{short_base_model_name}"] = partial(
+        fine_tuned_transformer._make_pipeline,
+        base_model=full_base_model_name,
     )
 
 

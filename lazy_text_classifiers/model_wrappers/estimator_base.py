@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Iterable
+from typing import Collection
 
 ###############################################################################
 
@@ -14,17 +14,17 @@ class EstimatorBase(ABC):
     @abstractmethod
     def fit(
         self: "EstimatorBase",
-        x: Iterable[str],
-        y: Iterable[str],
+        x: Collection[str],
+        y: Collection[str],
     ) -> "EstimatorBase":
         """
         Fit the estimator.
 
         Parameters
         ----------
-        x: Iterable[str]
+        x: Collection[str]
             The training data.
-        y: Iterable[str]
+        y: Collection[str]
             The testing data.
 
         Returns
@@ -37,19 +37,19 @@ class EstimatorBase(ABC):
     @abstractmethod
     def predict(
         self: "EstimatorBase",
-        x: Iterable[str],
-    ) -> Iterable[str]:
+        x: Collection[str],
+    ) -> Collection[str]:
         """
         Predict the values using the fitted estimator.
 
         Parameters
         ----------
-        x: Iterable[str]
+        x: Collection[str]
             The data to predict.
 
         Returns
         -------
-        Iterable[str]
+        Collection[str]
             The predictions.
         """
         pass

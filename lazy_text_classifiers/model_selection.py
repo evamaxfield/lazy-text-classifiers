@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import random
 import time
-from typing import TYPE_CHECKING, Any, Iterable
+from typing import TYPE_CHECKING, Any, Collection
 
 import numpy as np
 import pandas as pd
@@ -69,10 +69,10 @@ class LazyTextClassifiers:
 
     def fit(
         self: "LazyTextClassifiers",
-        x_train: Iterable[str],
-        x_test: Iterable[str],
-        y_train: Iterable[str],
-        y_test: Iterable[str],
+        x_train: Collection[str],
+        x_test: Collection[str],
+        y_train: Collection[str],
+        y_test: Collection[str],
         model_kwargs: dict[str, Any] | None = None,
     ) -> pd.DataFrame:
         """
@@ -80,13 +80,13 @@ class LazyTextClassifiers:
 
         Parameters
         ----------
-        x_train: Iterable[str]
+        x_train: Collection[str]
             The training data, an iterable object where each item is a string.
-        x_test: Iterable[str]
+        x_test: Collection[str]
             The testing data, an iterable object where each item is a string.
-        y_train: Iterable[str]
+        y_train: Collection[str]
             The training labels, an iterable object where each item is a class.
-        y_test: Iterable[str]
+        y_test: Collection[str]
             The testing labels, an iterable object where each item is a class.
         model_kwargs: dict[str, Any] | None
             Any specific model kwargs to pass through.

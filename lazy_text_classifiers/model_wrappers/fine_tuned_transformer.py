@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import TYPE_CHECKING, Any, Iterable
+from typing import TYPE_CHECKING, Any, Collection
 
 import numpy as np
 import pandas as pd
@@ -78,17 +78,17 @@ class TransformerEstimator(EstimatorBase):
 
     def fit(
         self: "TransformerEstimator",
-        x: Iterable[str],
-        y: Iterable[str],
+        x: Collection[str],
+        y: Collection[str],
     ) -> "TransformerEstimator":
         """
         Fit the estimator.
 
         Parameters
         ----------
-        x: Iterable[str]
+        x: Collection[str]
             The training data.
-        y: Iterable[str]
+        y: Collection[str]
             The testing data.
 
         Returns
@@ -185,19 +185,19 @@ class TransformerEstimator(EstimatorBase):
 
     def predict(
         self: "TransformerEstimator",
-        x: Iterable[str],
-    ) -> Iterable[str]:
+        x: Collection[str],
+    ) -> Collection[str]:
         """
         Predict the values using the fitted estimator.
 
         Parameters
         ----------
-        x: Iterable[str]
+        x: Collection[str]
             The data to predict.
 
         Returns
         -------
-        Iterable[str]
+        Collection[str]
             The predictions.
         """
         pipe = pipeline(
