@@ -23,8 +23,8 @@ from sklearn.model_selection import train_test_split
 # `x` should be an iterable of strings
 # `y` should be an iterable of string labels
 data = fetch_20newsgroups(subset="all", remove=("header", "footers", "quotes"))
-x = data.data[:2000]
-y = data.target[:2000]
+x = data.data[:1000]
+y = data.target[:1000]
 y = [data.target_names[id_] for id_ in y]
 
 # Split the data into train and test
