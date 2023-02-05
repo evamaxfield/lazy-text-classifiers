@@ -116,7 +116,7 @@ class TransformerEstimator(EstimatorBase):
         if "num_iterations" not in self.training_args:
             # This is sort of a hack, but as you increase in dataset size,
             # you don't need as many training iterations
-            self.training_args["num_iterations"] = max(200 // len(df_all), 2)
+            self.training_args["num_iterations"] = max(200 // len(df_all), 4)
 
         # Create trainer
         self.trainer = SetFitTrainer(

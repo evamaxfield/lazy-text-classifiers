@@ -15,7 +15,7 @@ from sklearn.metrics import (
     precision_recall_fscore_support,
 )
 
-from .constants import MODEL_NAME_WRAPPER_LUT
+from .constants import MODEL_NAME_WRAPPER_LUT, ModelNames
 
 if TYPE_CHECKING:
     from sklearn.pipeline import Pipeline
@@ -88,7 +88,6 @@ class LazyTextClassifiers:
             The training labels, an iterable object where each item is a class.
         y_test: Iterable[str]
             The testing labels, an iterable object where each item is a class.
-
         model_kwargs: dict[str, Any] | None
             Any specific model kwargs to pass through.
             Default None (use default parameters and settings for all models)
@@ -101,6 +100,10 @@ class LazyTextClassifiers:
         # Handle kwargs
         if model_kwargs is None:
             model_kwargs = {}
+
+        # Remove setfit model if data is larger than 200
+        if len(x_train) > 200:
+            MODEL_NAME_WRAPPER_LUT.pop(ModelNames.setfit_transformer)
 
         # Iterate model fitting and preds
         self.fit_models: dict[str, "EstimatorBase" | "Pipeline"] = {}

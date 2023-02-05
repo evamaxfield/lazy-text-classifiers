@@ -115,3 +115,4 @@ ENV/
 # Project specific
 lazy-text-fine-tuned-transformer/
 lazy-text-setfit-transformer/
+fine-tuned-*

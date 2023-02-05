@@ -51,7 +51,7 @@ class TransformerEstimator(EstimatorBase):
         if output_dir:
             self.model_dir = Path(output_dir).resolve()
         else:
-            self.model_dir = Path("lazy-text-fine-tuned-transformer/").resolve()
+            self.model_dir = Path(f"fine-tuned-{base_model}").resolve()
 
         # Handle training arguments
         if training_args:
