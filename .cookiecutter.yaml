@@ -5,6 +5,6 @@ default_context:
     project_name: "Lazy Text Classifiers"
     project_slug: "lazy-text-classifiers"
     python_slug: "lazy_text_classifiers"
-    project_short_description: "Build a test a variety of text classification models."
+    project_short_description: "Build and test a variety of text multi-class classification models."
     hosting_pypi_username: "evamaxfield"
     license: "MIT License"

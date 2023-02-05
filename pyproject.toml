@@ -10,7 +10,7 @@ build-backend = "setuptools.build_meta"
 # https://peps.python.org/pep-0621/
 [project]
 name = "lazy-text-classifiers"
-description = "Build a test a variety of text classification models."
+description = "Build and test a variety of text multi-class classification models."
 keywords = []
 readme = "README.md"
 requires-python = ">=3.8"
@@ -32,6 +32,7 @@ dependencies = [
   "numpy",  # no pin, dep from others
   "pandas~=1.0",
   "scikit-learn~=1.2",
+  "sentence-transformers",  # no pin, dep from others
   "setfit~=0.5",
   "torch",  # no pin, dep from others
   "transformers~=4.0",

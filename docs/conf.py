@@ -181,6 +181,6 @@ texinfo_documents = [
         "lazy-text-classifiers Documentation",
         author,
         "lazy_text_classifiers",
-        "Build a test a variety of text classification models.",
+        "Build and test a variety of text multi-class classification models.",
     ),
 ]

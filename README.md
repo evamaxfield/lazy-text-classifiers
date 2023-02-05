@@ -3,7 +3,7 @@
 [![Build Status](https://github.com/evamaxfield/lazy-text-classifiers/workflows/CI/badge.svg)](https://github.com/evamaxfield/lazy-text-classifiers/actions)
 [![Documentation](https://github.com/evamaxfield/lazy-text-classifiers/workflows/Documentation/badge.svg)](https://evamaxfield.github.io/lazy-text-classifiers)
 
-Build a test a variety of text classification models.
+Build and test a variety of text multi-class classification models.
 
 ---
 
@@ -58,6 +58,10 @@ semantic_logit = ltc.fit_models["semantic-logit"]
 ## Documentation
 
 For full package documentation please visit [evamaxfield.github.io/lazy-text-classifiers](https://evamaxfield.github.io/lazy-text-classifiers).
+
+## Acknowledgements
+
+This package was heavily inspired by [lazypredict](https://github.com/shankarpandala/lazypredict).
 
 ## Development
 
