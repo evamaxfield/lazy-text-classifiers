@@ -9,3 +9,5 @@ except PackageNotFoundError:
 
 __author__ = "Eva Maxfield Brown"
 __email__ = "evamaxfieldbrown@gmail.com"
+
+from .model_selection import LazyTextClassifiers  # noqa: F401
