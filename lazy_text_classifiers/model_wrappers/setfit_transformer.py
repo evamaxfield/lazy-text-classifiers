@@ -111,7 +111,9 @@ class TransformerEstimator(EstimatorBase):
         # Load metrics and create metric compute func
         f1_metric = load_metric("f1")
 
-        def compute_metrics(y_pred: Iterable[str], y_test: Iterable[str]) -> dict | None:
+        def compute_metrics(
+            y_pred: Iterable[str], y_test: Iterable[str]
+        ) -> dict | None:
             f1_score = f1_metric.compute(
                 predictions=y_pred,
                 references=y_test,
@@ -153,8 +155,11 @@ class TransformerEstimator(EstimatorBase):
         Iterable[str]
             The predictions.
         """
-        preds = self.trainer.model.predict(x)
-        return [self.id2label[str(pred)] for pred in preds]
+        if self.trainer is not None:
+            preds = self.trainer.model.predict(x)
+            return [self.id2label[str(pred)] for pred in preds]
+
+        raise ValueError("SetFit model has not been trained yet.")
 
 
 def _make_pipeline(

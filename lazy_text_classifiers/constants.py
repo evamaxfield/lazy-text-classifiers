@@ -5,7 +5,10 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Callable
 
 from .model_wrappers import (
+    fine_tuned_transformer,
+    semantic_logit,
     setfit_transformer,
+    tfidf_logit,
 )
 
 if TYPE_CHECKING:
