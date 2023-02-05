@@ -27,10 +27,13 @@ classifiers = [
 ]
 dynamic = ["version"]
 dependencies = [
+  "datasets~=2.0",
   "embetter~=0.3",
+  "numpy",  # no pin, dep from others
   "pandas~=1.0",
   "scikit-learn~=1.2",
   "setfit~=0.5",
+  "torch",  # no pin, dep from others
   "transformers~=4.0",
 ]
 
