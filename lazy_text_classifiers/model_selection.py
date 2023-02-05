@@ -31,7 +31,7 @@ class LazyTextClassifiers:
 
     def __init__(
         self: "LazyTextClassifiers",
-        verbose: int = 0,
+        verbose: int = 1,
         ignore_warnings: bool = True,
         random_state: int | None = None,
     ) -> None:
@@ -42,7 +42,11 @@ class LazyTextClassifiers:
         ----------
         verbose: int
             Logging verbosity level.
-            Default: 0 (do log anything)
+            Levels:
+                0 - no logging;
+                1 - log basic progress;
+                2 - log everything;
+            Default: 1 (log basic progress)
         ignore_warnings: bool
             Should all warnings be ignores.
         random_state: int | None
@@ -106,14 +110,16 @@ class LazyTextClassifiers:
             start_time = time.perf_counter()
 
             # Instantiate estimate with any extra kwargs
-            print(f"Initializing model: '{model_name}'")
+            if self.verbose > 0:
+                print(f"Initializing model: '{model_name}'")
             estimator = model_wrapper(
                 **model_kwargs.get(model_name, {}),
-                verbose=self.verbose > 0,
+                verbose=self.verbose > 1,
             )
 
             # Run the fit method passing in x_train and y_train
-            print(f"Fitting model: '{model_name}'")
+            if self.verbose > 0:
+                print(f"Fitting model: '{model_name}'")
             estimator = estimator.fit(x_train, y_train)
             self.fit_models[model_name] = estimator
 
@@ -121,7 +127,12 @@ class LazyTextClassifiers:
             duration = time.perf_counter() - start_time
 
             # Run the eval
-            print(f"Evaluating model: '{model_name}'")
+            if self.verbose > 0:
+                print(f"Evaluating model: '{model_name}'")
+
+            # Handle pd.Series
+            if isinstance(x_test, pd.Series):
+                x_test = x_test.tolist()
             preds = estimator.predict(x_test)
 
             # Calc metrics
@@ -138,17 +149,21 @@ class LazyTextClassifiers:
                 preds,
                 average="weighted",
             )
-            results_rows.append(
-                {
-                    "model": model_name,
-                    "accuracy": acc,
-                    "balanced_accuracy": bal_acc,
-                    "precision": pre,
-                    "recall": rec,
-                    "f1": f1,
-                    "time": duration,
-                }
-            )
+
+            # Combine and log if desired
+            this_model_result = {
+                "model": model_name,
+                "accuracy": acc,
+                "balanced_accuracy": bal_acc,
+                "precision": pre,
+                "recall": rec,
+                "f1": f1,
+                "time": duration,
+            }
+            if self.verbose > 0:
+                print(f"'{model_name}' eval results: {this_model_result}")
+
+            results_rows.append(this_model_result)
 
         # Create dataframe of results
         self.results_df = (
