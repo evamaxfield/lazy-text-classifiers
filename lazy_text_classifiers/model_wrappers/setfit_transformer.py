@@ -8,7 +8,6 @@ from typing import Any, Iterable
 import pandas as pd
 from datasets import Dataset, load_metric
 from setfit import SetFitModel, SetFitTrainer
-from sklearn.model_selection import train_test_split
 
 from .estimator_base import EstimatorBase
 
@@ -47,7 +46,6 @@ class TransformerEstimator(EstimatorBase):
             self.training_args = {
                 "batch_size": 4,
                 "num_epochs": 1,
-                "num_iterations": 12,
             }
 
     def fit(
@@ -83,11 +81,6 @@ class TransformerEstimator(EstimatorBase):
                 "label": y,
             }
         )
-        train_df, eval_df = train_test_split(
-            df_all,
-            test_size=self.eval_size,
-            stratify=df_all["label"],
-        )
 
         # Make the label luts
         label_names = df_all.label.unique()
@@ -103,10 +96,8 @@ class TransformerEstimator(EstimatorBase):
         model = SetFitModel.from_pretrained(self.base_model)
 
         # Create datasets
-        train_dataset = Dataset.from_pandas(train_df)
-        eval_dataset = Dataset.from_pandas(eval_df)
+        train_dataset = Dataset.from_pandas(df_all)
         train_dataset = train_dataset.class_encode_column("label")
-        eval_dataset = eval_dataset.class_encode_column("label")
 
         # Load metrics and create metric compute func
         f1_metric = load_metric("f1")
@@ -121,11 +112,16 @@ class TransformerEstimator(EstimatorBase):
             )
             return f1_score
 
+        # Determine number of training iterations
+        if "num_iterations" not in self.training_args:
+            # This is sort of a hack, but as you increase in dataset size,
+            # you don't need as many training iterations
+            self.training_args["num_iterations"] = max(200 // len(df_all), 2)
+
         # Create trainer
         self.trainer = SetFitTrainer(
             model=model,
             train_dataset=train_dataset,
-            eval_dataset=eval_dataset,
             metric=compute_metrics,
             **self.training_args,
         )

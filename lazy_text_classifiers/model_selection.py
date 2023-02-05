@@ -128,7 +128,7 @@ class LazyTextClassifiers:
 
             # Run the eval
             if self.verbose > 0:
-                print(f"Evaluating model: '{model_name}'")
+                print(f"Testing model: '{model_name}'")
 
             # Handle pd.Series
             if isinstance(x_test, pd.Series):
