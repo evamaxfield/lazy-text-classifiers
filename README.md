@@ -3,7 +3,7 @@
 [![Build Status](https://github.com/evamaxfield/lazy-text-classifiers/workflows/CI/badge.svg)](https://github.com/evamaxfield/lazy-text-classifiers/actions)
 [![Documentation](https://github.com/evamaxfield/lazy-text-classifiers/workflows/Documentation/badge.svg)](https://evamaxfield.github.io/lazy-text-classifiers)
 
-Build and test a variety of text multi-class classification models.
+Build and test a variety of text binary or multi-class classification models.
 
 ---
 
