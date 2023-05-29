@@ -20,15 +20,16 @@ if TYPE_CHECKING:
 
 class ModelNames:
     tfidf_logit = "tfidf-logit"
-    semantic_logit = "semantic-logit"
     setfit_transformer = "setfit-transformer"
-    fine_tuned_transformer = "fine-tuned-transformer"
-
 
 # Use a varienty of base models for the semantic models
 SEMANTIC_BASE_MODELS = {
     "distilbert-sst2": "distilbert-base-uncased-finetuned-sst-2-english",
     "distilbert-emotions": "joeddav/distilbert-base-uncased-go-emotions-student",
+    "mpnet-base-v2": "all-mpnet-base-v2",
+    # bloom is really good but REALLY large
+    # "bloom-560m": "bigscience/bloom-560m",
+    "multi-qa-mpnet-base-v1": "multi-qa-mpnet-base-dot-v1",
 }
 
 
@@ -38,6 +39,9 @@ for short_base_model_name, full_base_model_name in SEMANTIC_BASE_MODELS.items():
         semantic_logit._make_pipeline,
         sentence_encoder_kwargs={
             "name": full_base_model_name,
+        },
+        logit_regression_cv_kwargs={
+            "class_weight": "balanced",
         },
     )
     SEMANTIC_MODEL_VARIANTS[f"fine-tuned-{short_base_model_name}"] = partial(
