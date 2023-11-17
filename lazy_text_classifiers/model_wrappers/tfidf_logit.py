@@ -27,6 +27,7 @@ def _make_pipeline(
             strip_accents="unicode",
             lowercase=True,
             stop_words="english",
+            ngram_range=(1, 2),
         )
 
     if logit_regression_cv_kwargs:

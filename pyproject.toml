@@ -27,6 +27,7 @@ classifiers = [
 ]
 dynamic = ["version"]
 dependencies = [
+  "altair~=5.1",
   "datasets~=2.0",
   "embetter~=0.3",
   "numpy",  # no pin, dep from others

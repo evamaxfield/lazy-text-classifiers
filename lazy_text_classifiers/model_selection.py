@@ -73,6 +73,7 @@ class LazyTextClassifiers:
         x_test: Collection[str],
         y_train: Collection[str],
         y_test: Collection[str],
+        include_setfit: bool = True,
         model_kwargs: dict[str, Any] | None = None,
     ) -> pd.DataFrame:
         """
@@ -88,6 +89,9 @@ class LazyTextClassifiers:
             The training labels, an iterable object where each item is a class.
         y_test: Collection[str]
             The testing labels, an iterable object where each item is a class.
+        include_setfit: bool
+            Should the setfit model be included.
+            Default True (include setfit model)
         model_kwargs: dict[str, Any] | None
             Any specific model kwargs to pass through.
             Default None (use default parameters and settings for all models)
@@ -102,7 +106,7 @@ class LazyTextClassifiers:
             model_kwargs = {}
 
         # Remove setfit model if data is larger than 200
-        if len(x_train) > 200:
+        if not include_setfit or len(x_train) > 200:
             MODEL_NAME_WRAPPER_LUT.pop(ModelNames.setfit_transformer)
 
         # Iterate model fitting and preds

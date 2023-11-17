@@ -25,11 +25,8 @@ class ModelNames:
 # Use a varienty of base models for the semantic models
 SEMANTIC_BASE_MODELS = {
     "distilbert-sst2": "distilbert-base-uncased-finetuned-sst-2-english",
-    "distilbert-emotions": "joeddav/distilbert-base-uncased-go-emotions-student",
-    "mpnet-base-v2": "all-mpnet-base-v2",
-    # bloom is really good but REALLY large
-    # "bloom-560m": "bigscience/bloom-560m",
-    "multi-qa-mpnet-base-v1": "multi-qa-mpnet-base-dot-v1",
+    "bge-base-en-v1dot5": "BAAI/bge-base-en-v1.5",
+    "all-mpnet-base-v2": "all-mpnet-base-v2",
 }
 
 

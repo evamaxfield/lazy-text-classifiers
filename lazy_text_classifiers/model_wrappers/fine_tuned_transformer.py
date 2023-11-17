@@ -18,7 +18,7 @@ from transformers import (
     TrainingArguments,
     pipeline,
 )
-from transformers.trainer_callback import PrinterCallback
+from transformers.trainer_callback import PrinterCallback, EarlyStoppingCallback
 
 from .estimator_base import EstimatorBase
 
@@ -71,7 +71,7 @@ class TransformerEstimator(EstimatorBase):
                 metric_for_best_model="f1",
                 per_device_eval_batch_size=4,
                 per_device_train_batch_size=4,
-                num_train_epochs=5,
+                num_train_epochs=20,
                 weight_decay=0.01,
                 **logging_args,
             )
@@ -171,11 +171,12 @@ class TransformerEstimator(EstimatorBase):
             tokenizer=tokenizer,
             data_collator=data_collator,
             compute_metrics=compute_metrics,
+            callbacks=[EarlyStoppingCallback(early_stopping_patience=3)]
         )
 
         # Remove printer callback if it exists
-        if not self.verbose:
-            self.trainer.remove_callback(PrinterCallback)
+        # if not self.verbose:
+        #     self.trainer.remove_callback(PrinterCallback)
 
         # Train
         self.trainer.train()
