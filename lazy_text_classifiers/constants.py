@@ -26,7 +26,7 @@ class ModelNames:
 SEMANTIC_BASE_MODELS = {
     "distilbert-sst2": "distilbert-base-uncased-finetuned-sst-2-english",
     "bge-base-en-v1dot5": "BAAI/bge-base-en-v1.5",
-    "all-mpnet-base-v2": "all-mpnet-base-v2",
+    "all-mpnet-base-v2": "sentence-transformers/all-mpnet-base-v2",
 }
 
 
