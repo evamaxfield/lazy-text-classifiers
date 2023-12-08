@@ -21,7 +21,7 @@ class TransformerEstimator(EstimatorBase):
 
     def __init__(
         self: "TransformerEstimator",
-        base_model: str = "distilbert-base-uncased",
+        base_model: str = "cardiffnlp/twitter-roberta-base-sentiment",
         training_args: dict[str, Any] | None = None,
         eval_size: float = 0.2,
         output_dir: Path | str | None = None,
@@ -153,7 +153,7 @@ class TransformerEstimator(EstimatorBase):
         """
         if self.trainer is not None:
             preds = self.trainer.model.predict(x)
-            return [self.id2label[str(pred)] for pred in preds]
+            return [self.id2label[str(pred.item())] for pred in preds]
 
         raise ValueError("SetFit model has not been trained yet.")
 

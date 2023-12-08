@@ -24,12 +24,9 @@ class ModelNames:
 
 # Use a varienty of base models for the semantic models
 SEMANTIC_BASE_MODELS = {
-    "distilbert-sst2": "distilbert-base-uncased-finetuned-sst-2-english",
     "bge-base-en-v1dot5": "BAAI/bge-base-en-v1.5",
     "all-mpnet-base-v2": "sentence-transformers/all-mpnet-base-v2",
 }
-
-
 SEMANTIC_MODEL_VARIANTS = {}
 for short_base_model_name, full_base_model_name in SEMANTIC_BASE_MODELS.items():
     SEMANTIC_MODEL_VARIANTS[f"semantic-logit-{short_base_model_name}"] = partial(
@@ -41,7 +38,14 @@ for short_base_model_name, full_base_model_name in SEMANTIC_BASE_MODELS.items():
             "class_weight": "balanced",
         },
     )
-    SEMANTIC_MODEL_VARIANTS[f"fine-tuned-{short_base_model_name}"] = partial(
+
+TRANSFORMER_BASE_MODELS = {
+    "distilbert-sst2": "distilbert-base-uncased-finetuned-sst-2-english",
+    "twitter-roberta-base-sent": "cardiffnlp/twitter-roberta-base-sentiment",
+}
+TRANSFORMER_MODEL_VARIANTS = {}
+for short_base_model_name, full_base_model_name in TRANSFORMER_BASE_MODELS.items():
+    TRANSFORMER_MODEL_VARIANTS[f"fine-tuned-{short_base_model_name}"] = partial(
         fine_tuned_transformer._make_pipeline,
         base_model=full_base_model_name,
     )
@@ -50,5 +54,6 @@ for short_base_model_name, full_base_model_name in SEMANTIC_BASE_MODELS.items():
 MODEL_NAME_WRAPPER_LUT: dict[str, Callable[..., "Pipeline" | "EstimatorBase"]] = {
     ModelNames.tfidf_logit: tfidf_logit._make_pipeline,
     **SEMANTIC_MODEL_VARIANTS,
+    **TRANSFORMER_MODEL_VARIANTS,
     ModelNames.setfit_transformer: setfit_transformer._make_pipeline,
 }
