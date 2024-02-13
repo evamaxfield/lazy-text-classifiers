@@ -22,6 +22,7 @@ class ModelNames:
     tfidf_logit = "tfidf-logit"
     setfit_transformer = "setfit-transformer"
 
+
 # Use a varienty of base models for the semantic models
 SEMANTIC_BASE_MODELS = {
     "gte": "thenlper/gte-base",
